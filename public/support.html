@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Support</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="/css/screen.css">
+  </head>
+  
+  <body>
+    
+    <div id="viewport-container" class="dm-box-shadow">
+      <div id="viewport">
+        <div id="container">
+          <h1>Програма підтримки користувачів</h1>
+        
+          <p>
+            Ця веб сторінка демонструє функціонал програми, написаної мовою Javascript. Ця програма була розроблена
+            за допомогою наступних бібліотек:
+          </p>
+          
+          <ul>
+            <li>jQuery</li>
+            <li>Backbone</li>
+            <li>Underscore</li>
+          </ul>
+          
+          <h3>Як розпочати роботу з чатом?</h3>
+          
+          <p>
+            Для того, щоб зв'язатися зі співробітником нашого департаменту підтримки користувачів вебсайту, натисніть на кнопку з права.
+          </p>
+        </div>
+        
+        <div id="viewport-cover">&nbsp;</div>
+      </div>
+      <div id="viewport-ajax-loader">&nbsp;</div>
+    </div>
+    
+    
+    <!-- Chat notification template -->
+    <script id="tmpl-dm-chat-notification" type="text/template">
+      <div class="dm-chat-notification-client"><%= clientName %> каже:</div>
+      <div class="dm-chat-notification-client-message"><%= clientMessage %></div>
+      <div class="dm-chat-notification-message"><%= message %></div>
+      <div class="dm-chat-notification-actions">
+        <a class="dm-chat-notification-accept dm-chat-button" href="#">Звісно!</a>
+      </div>
+    </script>
+    
+    
+    <!-- Chat container template -->
+    <script id="tmpl-dm-chat" type="text/template">
+      <div class="dm-chat-messages">
+        <ul></ul>
+      </div>
+        
+      <div class="dm-chat-reply">
+        <textarea class="dm3-chat-reply-textarea"></textarea>
+        <a class="dm-chat-reply-submit dm-chat-button" href="#">Submit</a>
+      </div>
+    </script>
+    
+    
+    <!-- Message template -->
+    <script id="tmpl-dm-chat-message" type="text/template">
+      <div class="dm-chat-message-meta"><%= me %> <span class="dm-chat-message-time"><%= time %></span></div>
+      <div class="dm-chat-message-body"><%= body %></div>
+    </script>
+    
+  </body>
+</html>
+
+
+<!-- Javascripts -->
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/underscore.js"></script>
+<script src="/js/backbone.js"></script>
+<script>
+/**
+ * Globals
+ */
+DM_CHAT_GLOBALS = {
+  me: 'support',
+  app: 'support',
+  t: {
+    'chatOpen': 'Відкрити чат підтримки користувачів',
+    'newClientNotification': 'Чи бажаєте ви допомогти цьому користувачеві?'
+  }
+};
+
+
+/**
+ * Establish connection
+ */
+var dm_socket = io.connect('http://localhost:8080');
+</script>
+<script src="/js/chat.js"></script>
+<script src="/js/viewport.js"></script>
