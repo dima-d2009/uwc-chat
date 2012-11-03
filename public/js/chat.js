@@ -240,8 +240,8 @@
         messages_num = messages_view.getNewMessagesNum();
     
     e.preventDefault();
-    
-    if (textarea_message_val == '') {
+
+    if ($.trim(textarea_message_val) == '') {
       // Nothing to send
       return;
     }
@@ -267,9 +267,10 @@
   /**
    * Send message on "enter" key up
    */
-  $('.dm-chat-reply > textarea', div_chat).on('keyup', function(e) {
+  $('.dm-chat-reply > textarea', div_chat).on('keypress', function(e) {
     if (e.which == 13 && e.shiftKey == false) {
       $('.dm-chat-reply-submit', div_chat).trigger('click');
+      e.preventDefault();
     }
   });
   

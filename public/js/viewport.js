@@ -1,4 +1,7 @@
 (function ($) {
+  var enable_viewport = (DM_CHAT_GLOBALS.app == 'client') ? true : false;
+  
+  
   /**
    * Create click indicator
    */
@@ -54,6 +57,10 @@
       var viewport = $('#viewport'),
           win = $(window);
       
+      if (enable_viewport === false) {
+        return;
+      }
+      
       dm_socket.emit('message', {
         type: 'support_click',
         x: e.pageX - viewport.offset().left,
@@ -80,6 +87,10 @@
             'duration': 300
           });
         } else {
+          if (enable_viewport === false) {
+            return;
+          }
+          
           var viewport_css = {
             'width': message.width + 'px',
             'height': message.height + 'px'
@@ -107,6 +118,7 @@
      * Request client's viewport dimensions, when support accepts notification
      */
     $('body').on('dmChatAcceptNotification', function() {
+      enable_viewport = true;
       dm_socket.emit('message', { type: 'viewport_data', action: 'refresh' });
     });
   }
